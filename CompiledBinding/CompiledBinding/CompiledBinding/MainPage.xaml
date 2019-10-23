@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewmodels="clr-namespace:CompiledBinding.ViewModels"
+             xmlns:models="clr-namespace:CompiledBinding.Models"
+             mc:Ignorable="d"
+             x:Class="CompiledBinding.MainPage"
+             x:DataType="viewmodels:UserViewModel"> <!--The ContentPage node have the x:DataType property of ViewModel-->
+
+    <ContentPage.BindingContext>
+        <viewmodels:UserViewModel/>
+    </ContentPage.BindingContext>
+
+    <StackLayout BindableLayout.ItemsSource="{Binding Users}" >        
+        <BindableLayout.ItemTemplate>
+            <DataTemplate x:DataType="models:User">
+                <!--The DataTemplate have the x:DataType property of Model-->
+                <StackLayout BackgroundColor="Gray">
+                    <Label Text="{Binding Name}" HorizontalOptions="Center" 
+                           VerticalOptions="CenterAndExpand" />
+                    <Label Text="{Binding Age}"  HorizontalOptions="Center" 
+                           VerticalOptions="CenterAndExpand" />
+                </StackLayout>
+            </DataTemplate>
+        </BindableLayout.ItemTemplate>
+    </StackLayout>
+
+</ContentPage>
