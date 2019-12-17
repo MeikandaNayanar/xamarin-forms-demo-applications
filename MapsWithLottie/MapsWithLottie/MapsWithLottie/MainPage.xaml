@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:maps="clr-namespace:Syncfusion.SfMaps.XForms;assembly=Syncfusion.SfMaps.XForms"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms" 
+             xmlns:local="clr-namespace:MapsWithLottie;assembly=MapsWithLottie"
+             mc:Ignorable="d"
+             x:Class="MapsWithLottie.MainPage">
+
+    <StackLayout>
+        <StackLayout.BindingContext>
+            <local:ViewModel/>
+        </StackLayout.BindingContext>
+
+        <maps:SfMaps x:Name="sfmap"  BackgroundColor="White" VerticalOptions="FillAndExpand">
+            <maps:SfMaps.Layers >
+                <maps:ShapeFileLayer Uri="world-map.shp" ItemsSource="{Binding DataSource}" ShapeIDPath="Country" ShapeIDTableField="admin">
+                    <maps:ShapeFileLayer.TooltipSettings>
+                        <maps:TooltipSetting  ShowTooltip="True" PointerLength="0" StrokeColor="Transparent" BackgroundColor="Transparent" ValuePath="Country" Duration="2000">
+                            <maps:TooltipSetting.TooltipTemplate>
+                                <DataTemplate>
+                                    <StackLayout IsClippedToBounds="false" HorizontalOptions="StartAndExpand" VerticalOptions="Center" HeightRequest="70" WidthRequest="70">
+                                        <Label Text="{Binding Country}" 
+                                               TextColor="Black"
+                                               FontAttributes="Bold"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"
+                                               FontSize="10"  />
+                                        <forms:AnimationView
+                                            Animation="mapmaker.json"
+                                            Loop="True" IsPlaying="True"
+                                            VerticalOptions="FillAndExpand" 
+                                            HorizontalOptions="FillAndExpand" />
+                                    </StackLayout>
+                                </DataTemplate>
+                            </maps:TooltipSetting.TooltipTemplate>
+                        </maps:TooltipSetting>
+                    </maps:ShapeFileLayer.TooltipSettings>
+
+                    <maps:ShapeFileLayer.Markers>
+                        <maps:MapMarker  Latitude="38.8833" Longitude= "-77.0167" Label="India" />
+                        <maps:MapMarker  Latitude="-15.7833" Longitude= "-47.8667"   Label="India"/>
+                        <maps:MapMarker  Latitude="21.0000" Longitude= "78.0000"  Label="India"/>
+                        <maps:MapMarker  Latitude="35.0000" Longitude= "103.0000"  Label="India" />
+                        <maps:MapMarker  Latitude="-6.1750" Longitude= "106.8283"  Label="India" />
+                    </maps:ShapeFileLayer.Markers>
+
+                    <maps:ShapeFileLayer.MarkerTemplate>
+                        <DataTemplate >
+                            <StackLayout IsClippedToBounds="false" HorizontalOptions="StartAndExpand" VerticalOptions="Center" HeightRequest="40" WidthRequest="40"  >
+                                <forms:AnimationView
+                                    Animation="mapmaker.json" 
+                                    Loop="True" IsPlaying="True"
+                                    VerticalOptions="FillAndExpand" 
+                                    HorizontalOptions="FillAndExpand" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </maps:ShapeFileLayer.MarkerTemplate>
+                </maps:ShapeFileLayer>
+            </maps:SfMaps.Layers>
+        </maps:SfMaps>
+    </StackLayout>
+
+</ContentPage>
