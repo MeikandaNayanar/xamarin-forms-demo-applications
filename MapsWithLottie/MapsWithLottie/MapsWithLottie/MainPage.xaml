@@ -14,53 +14,49 @@
             <local:ViewModel/>
         </StackLayout.BindingContext>
 
-        <maps:SfMaps x:Name="sfmap"  BackgroundColor="White" VerticalOptions="FillAndExpand">
+        <!--Add a map with tooltip to your application -->
+     <maps:SfMaps x:Name="sfmap" BackgroundColor="White" VerticalOptions="FillAndExpand">
             <maps:SfMaps.Layers >
-                <maps:ShapeFileLayer Uri="world-map.shp" ItemsSource="{Binding DataSource}" ShapeIDPath="Country" ShapeIDTableField="admin">
+                <maps:ShapeFileLayer Uri="world-map.shp" ItemsSource="{Binding DataSource}" ShapeIDPath="Country"
+                                     ShapeIDTableField="admin">
                     <maps:ShapeFileLayer.TooltipSettings>
-                        <maps:TooltipSetting  ShowTooltip="True" PointerLength="0" StrokeColor="Transparent" BackgroundColor="Transparent" ValuePath="Country" Duration="2000">
+                        <maps:TooltipSetting  ShowTooltip="True" PointerLength="0"
+                                              StrokeColor="Transparent" BackgroundColor="Transparent"
+                                              ValuePath="Country" Duration="1000">
                             <maps:TooltipSetting.TooltipTemplate>
                                 <DataTemplate>
-                                    <StackLayout IsClippedToBounds="false" HorizontalOptions="StartAndExpand" VerticalOptions="Center" HeightRequest="70" WidthRequest="70">
+
+                                    <StackLayout IsClippedToBounds="false"
+                                                 HorizontalOptions="StartAndExpand"
+                                                 VerticalOptions="Start"
+                                                 HeightRequest="70"
+                                                 WidthRequest="70">
+
+                                        <!--Display the location name -->
                                         <Label Text="{Binding Country}" 
-                                               TextColor="Black"
+                                               TextColor="#FF5733"
                                                FontAttributes="Bold"
                                                HorizontalOptions="Center"
                                                VerticalOptions="Center"
                                                FontSize="10"  />
+
+                                        <!--JSON file for animation -->
                                         <forms:AnimationView
                                             Animation="mapmaker.json"
                                             Loop="True" IsPlaying="True"
                                             VerticalOptions="FillAndExpand" 
                                             HorizontalOptions="FillAndExpand" />
+
                                     </StackLayout>
+
                                 </DataTemplate>
                             </maps:TooltipSetting.TooltipTemplate>
                         </maps:TooltipSetting>
                     </maps:ShapeFileLayer.TooltipSettings>
-
-                    <maps:ShapeFileLayer.Markers>
-                        <maps:MapMarker  Latitude="38.8833" Longitude= "-77.0167" Label="India" />
-                        <maps:MapMarker  Latitude="-15.7833" Longitude= "-47.8667"   Label="India"/>
-                        <maps:MapMarker  Latitude="21.0000" Longitude= "78.0000"  Label="India"/>
-                        <maps:MapMarker  Latitude="35.0000" Longitude= "103.0000"  Label="India" />
-                        <maps:MapMarker  Latitude="-6.1750" Longitude= "106.8283"  Label="India" />
-                    </maps:ShapeFileLayer.Markers>
-
-                    <maps:ShapeFileLayer.MarkerTemplate>
-                        <DataTemplate >
-                            <StackLayout IsClippedToBounds="false" HorizontalOptions="StartAndExpand" VerticalOptions="Center" HeightRequest="40" WidthRequest="40"  >
-                                <forms:AnimationView
-                                    Animation="mapmaker.json" 
-                                    Loop="True" IsPlaying="True"
-                                    VerticalOptions="FillAndExpand" 
-                                    HorizontalOptions="FillAndExpand" />
-                            </StackLayout>
-                        </DataTemplate>
-                    </maps:ShapeFileLayer.MarkerTemplate>
                 </maps:ShapeFileLayer>
             </maps:SfMaps.Layers>
         </maps:SfMaps>
+
     </StackLayout>
 
 </ContentPage>
